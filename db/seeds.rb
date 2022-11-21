@@ -32,7 +32,7 @@ User.create(
   last_name: "user",
   email: "user@teste.com",
   age: 18,
-  password: "123123"
+  password: "123123".to_i
 )
 
 5.times do
