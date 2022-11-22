@@ -2,20 +2,22 @@ class RidesController < ApplicationController
   before_action :set_ride, only: %i[show edit update]
 
   def index
-    @rides = Ride.all
+    @rides = policy_scope(Ride)
   end
 
   def show
+    authorize @ride
   end
 
   def new
     @ride = Ride.new
+    authorize @ride
   end
 
   def create
     @ride = Ride.new(ride_params)
-    puts(current_user.email)
     @ride.user = current_user
+    authorize @ride
     if @ride.save
       redirect_to root_path
     else
@@ -24,14 +26,22 @@ class RidesController < ApplicationController
   end
 
   def edit
+    authorize @ride
   end
 
   def update
+    authorize @ride
     if @ride.update(ride_params)
       redirect_to root_path
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    authorize @ride
+    @ride.destroy
+    redirect_to rides_url, notice: "Ride was successfully destroyed."
   end
 
   private

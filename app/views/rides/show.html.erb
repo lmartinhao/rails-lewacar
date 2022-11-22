@@ -1,3 +1,4 @@
+<%= button_to "Destroy this ride", @ride, method: :delete if policy(@ride).destroy? %>
 <div class="card">
   <div class="card-header">
     <i class="fa-regular fa-map"></i> <%= @ride.route %> com <strong><%= @ride.user.first_name %></strong>
@@ -10,6 +11,10 @@
     </div>
   </div>
 </div>
+
+<% if policy(@ride).edit? %>
+  <%= link_to "Edit this ride", edit_ride_path(@ride) %> |
+<% end %>
 
 <div class="mt-5">
   <%= link_to "Ver outras caronas", rides_path, class: "btn btn-primary" %>
