@@ -1,4 +1,7 @@
 class RidePolicy < ApplicationPolicy
+  def index?
+    true
+  end
 
   def show?
     true
@@ -15,11 +18,10 @@ class RidePolicy < ApplicationPolicy
   def destroy?
     record.user == user
   end
-end
 
-class Scope < Scope
-
-  def resolve
-    user.admin? ? scope.all : scope.where(user: user)
+  class Scope < Scope
+    def resolve
+      scope.all
+    end
   end
 end

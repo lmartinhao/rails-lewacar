@@ -1,7 +1,7 @@
 <div class="container py-5">
   <div class="d-flex align-items-center justify-content-between mb-3">
     <h3 class="mb-0">Caronas disponíveis</h3>
-    <%= link_to "Oferecer uma carona", new_ride_path if policy(Ride).new?, class: "btn btn-success btn-sm" %>
+    <%= link_to "Oferecer uma carona", new_ride_path, class: "btn btn-success btn-sm" if policy(Ride).new? %>
   </div>
   <div class="row d-flex justify-content-between">
     <% @rides.each do |ride| %>
