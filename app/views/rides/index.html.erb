@@ -1,1 +1,27 @@
-<%= @ride%>
+<div class="container py-5">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h3 class="mb-0">Caronas disponíveis</h3>
+    <%= link_to "Oferecer uma carona", new_ride_path, class: "btn btn-success btn-sm" %>
+  </div>
+  <div class="row d-flex justify-content-between">
+    <% @rides.each do |ride| %>
+      <div class="card mt-5" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Carona oferecida por: <%= ride.user.first_name %></li>
+            <li class="list-group-item"><i class="fa-regular fa-map"></i> <%= ride.route %></li>
+          </ul>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item"><i class="fa-regular fa-calendar"></i> <%= ride.date %></li>
+          <li class="list-group-item"><i class="fa-solid fa-location-dot"></i> <%= ride.pickup_address %></li>
+          <li class="list-group-item"><i class="fa-regular fa-clock"></i> <%= ride.time.strftime('%H:%M') %></li>
+        </ul>
+        <div class="card-body">
+          <%= link_to "Pegar carona!", ride_path(ride), class: "btn btn-primary d-grid" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
