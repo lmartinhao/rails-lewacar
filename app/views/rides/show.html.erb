@@ -1,0 +1,5 @@
+<% if policy(@ride).edit? %>
+  <%= link_to "Edit this ride", edit_ride_path(@ride) %> |
+<% end %>
+<!-- [...] -->
+<%= button_to "Destroy this ride", @ride, method: :delete if policy(@ride).destroy? %>

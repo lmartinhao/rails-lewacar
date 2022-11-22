@@ -1,1 +1,2 @@
 <%= @ride%>
+<%= link_to "New ride", new_ride_path if policy(Ride).new? %>
