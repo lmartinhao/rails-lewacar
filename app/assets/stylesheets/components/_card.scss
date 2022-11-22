@@ -1,0 +1,32 @@
+.card {
+  color: $dark-blue;
+  border-radius: $border-radius;
+  border-color: white;
+}
+
+hr {
+  color: $pink;
+}
+
+.btn {
+  color: white;
+  border-radius: $border-radius-lg;
+  text-transform: uppercase;
+
+  &:hover {
+    color: $pink;
+  }
+}
+
+.title {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+h3 {
+  color: $dark-blue;
+}
+
+.list-group-item {
+  border-color: white;
+}
