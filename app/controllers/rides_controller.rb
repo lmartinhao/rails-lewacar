@@ -61,5 +61,4 @@ class RidesController < ApplicationController
   def verify_policy_scope
     true
   end
-
 end

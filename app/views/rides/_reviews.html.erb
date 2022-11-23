@@ -1,6 +1,6 @@
 <div class="card text-center">
         <div class="card-header mb-3">
-          Veja o que estão falando de <strong><%= @ride.user.first_name %></strong>
+          Veja o que estão falando sobre <strong><%= @ride.user.first_name %></strong>
         </div>
       </div>
 
@@ -15,6 +15,7 @@
                 <strong><%= "#{Faker::Name.first_name} #{Faker::Name.last_name}" %></strong>, <%= rand(1..10) %> dias atrás
               </footer>
             </blockquote>
+            <hr>
           </div>
         </div>
       <% end %>

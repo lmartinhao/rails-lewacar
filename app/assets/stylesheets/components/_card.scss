@@ -23,12 +23,13 @@ hr {
   text-transform: uppercase;
 }
 
-h3 {
+h3, h2 {
   color: $dark-blue;
 }
 
 .list-group-item {
   border-color: white;
+  text-transform: uppercase;
 }
 
 .blockquote {
