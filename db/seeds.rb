@@ -12,13 +12,13 @@ User.destroy_all
 
 puts 'Creating users'
 
-10.times do
+30.times do
   @user = User.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
     age: rand(18..40),
-    password: Faker::String.random
+    password: "123123"
   )
   @users << @user
   puts "user with id: #{@user.id} has been created"
@@ -26,15 +26,7 @@ end
 
 puts 'Creating master user'
 
-User.create(
-  first_name: "master",
-  last_name: "user",
-  email: "user@teste.com",
-  age: 18,
-  password: "123123".to_i
-)
-
-5.times do
+100.times do
   ride = Ride.create(
     user: @users.sample,
     route: "#{Faker::Address.street_name} até #{Faker::Address.street_name}",

@@ -1,5 +1,3 @@
-<%= button_to "Destroy this ride", @ride, method: :delete if policy(@ride).destroy? %>
-
 <div class="container text-center mt-5">
   <div class="row d-flex">
 
@@ -23,12 +21,19 @@
         </div>
       </div>
 
-      <% if policy(@ride).edit? %>
-       <%= link_to "Edit this ride", edit_ride_path(@ride) %> |
-      <% end %>
+      <div>
 
-      <div class="d-flex justify-content-start mt-5">
-        <%= link_to "Ver outras caronas", rides_path, class: "btn btn-primary" %>
+        <div class="d-flex justify-content-end mt-5">
+          <% if policy(@ride).edit? %>
+          <%= link_to "Edit this ride", edit_ride_path(@ride), class: "btn btn-warning btn-sm" %>  |
+          <%= button_to "Destroy this ride", @ride, method: :delete, class: "btn btn-danger btn-sm" %>
+          <% end %>
+        </div>
+
+        <div class="d-flex justify-content-start mt-5">
+          <%= link_to "Ver outras caronas", rides_path, class: "btn btn-primary" %>
+        </div>
+
       </div>
     </div>
 
