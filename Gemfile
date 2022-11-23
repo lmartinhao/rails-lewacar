@@ -82,3 +82,4 @@ end
 
 gem "pundit"
 gem "dotenv-rails", groups: [:development, :test]
+gem "cloudinary"
