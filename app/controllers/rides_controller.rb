@@ -1,5 +1,7 @@
 class RidesController < ApplicationController
   before_action :set_ride, only: %i[show edit update]
+  before_action :verify_policy_scope, only: :index
+  skip_before_action :authenticate_user!, only: :index
 
   def index
     @rides = policy_scope(Ride)
@@ -55,4 +57,9 @@ class RidesController < ApplicationController
   def ride_params
     params.require(:ride).permit(:user, :route, :date, :price, :pickup_address, :time, :passengers)
   end
+
+  def verify_policy_scope
+    true
+  end
+
 end
