@@ -18,7 +18,8 @@ puts 'Creating users'
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
     age: rand(18..40),
-    password: Faker::String.random
+    password: Faker::String.random,
+    avatar: Cloudinary::Uploader.upload("https://picsum.photos/501/501")
   )
   @users << @user
   puts "user with id: #{@user.id} has been created"
@@ -31,7 +32,8 @@ User.create(
   last_name: "user",
   email: "user@teste.com",
   age: 18,
-  password: "123123".to_i
+  password: "123123".to_i,
+  avatar: Cloudinary::Uploader.upload("https://picsum.photos/501/501")
 )
 
 5.times do
