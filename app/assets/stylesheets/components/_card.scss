@@ -30,3 +30,19 @@ h3 {
 .list-group-item {
   border-color: white;
 }
+
+.blockquote {
+  font-size: small;
+}
+
+.value-box {
+  background-color: $green;
+  color: white;
+  padding: 10px;
+  font-size: x-large;
+}
+
+.availability-box {
+  color: gray;
+  font-size: small;
+}

@@ -1,21 +1,41 @@
 <%= button_to "Destroy this ride", @ride, method: :delete if policy(@ride).destroy? %>
-<div class="card">
-  <div class="card-header">
-    <i class="fa-regular fa-map"></i> <%= @ride.route %> com <strong><%= @ride.user.first_name %></strong>
-  </div>
-  <div class="card-body">
-    <p class="card-title"><i class="fa-regular fa-calendar"></i> <%= @ride.date %></p>
-    <p class="card-text"><i class="fa-solid fa-location-dot"></i> <%= @ride.pickup_address %></li></p>
-    <div class="mt-5">
-      <a href="#" class="btn btn-primary">Caronas deste motorista</a>
+
+<div class="container text-center mt-5">
+  <div class="row d-flex">
+
+    <div class="col-8">
+      <div class="card shadow">
+        <div class="card-header">
+          <i class="fa-regular fa-map"></i> <%= @ride.route %> com <strong><%= @ride.user.first_name %></strong>
+        </div>
+        <div class="card-body mt-3">
+          <h4 class="card-title"><i class="fa-regular fa-calendar"></i> <%= @ride.date %></h4>
+          <p class="card-text"><i class="fa-solid fa-location-dot"></i> Ponto de encontro em <strong><%= @ride.pickup_address %></strong> às <strong><%= @ride.time.strftime('%H:%M') %></strong></li></p>
+          <div class="value-box d-flex justify-content-center rounded" style="width: 80px;">
+            <li class="list-group-item"><i class="fa-solid fa-dollar-sign"></i> <%= @ride.price %></li>
+          </div>
+          <div class="availability-box d-flex justify-content-start mt-2">
+            <li class="list-group-item"><i class="fa-solid fa-users"></i> <%= @ride.passengers %> assentos disponíveis para esta corrida.</li>
+          </div>
+          <div class="mt-5">
+            <a href="#" class="btn btn-success">Reservar!</a>
+          </div>
+        </div>
+      </div>
+
+      <% if policy(@ride).edit? %>
+       <%= link_to "Edit this ride", edit_ride_path(@ride) %> |
+      <% end %>
+
+      <div class="d-flex justify-content-start mt-5">
+        <%= link_to "Ver outras caronas", rides_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+
+    <div class="col-4">
+
+      <%= render "reviews" %>
+
     </div>
   </div>
-</div>
-
-<% if policy(@ride).edit? %>
-  <%= link_to "Edit this ride", edit_ride_path(@ride) %> |
-<% end %>
-
-<div class="mt-5">
-  <%= link_to "Ver outras caronas", rides_path, class: "btn btn-primary" %>
 </div>

@@ -1,0 +1,20 @@
+<div class="card text-center">
+        <div class="card-header mb-3">
+          Veja o que estão falando de <strong><%= @ride.user.first_name %></strong>
+        </div>
+      </div>
+
+      <% 10.times do %>
+        <div class="card">
+          <div class="card-body">
+            <h6><strong><%= Faker::Address.city %></strong> até <strong><%= Faker::Address.city %></strong></h6>
+
+            <blockquote class="blockquote">
+              <p> <%= Faker::Quote.most_interesting_man_in_the_world %></p>
+              <footer class="blockquote-footer">
+                <strong><%= "#{Faker::Name.first_name} #{Faker::Name.last_name}" %></strong>, <%= rand(1..10) %> dias atrás
+              </footer>
+            </blockquote>
+          </div>
+        </div>
+      <% end %>
