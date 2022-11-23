@@ -1,0 +1,15 @@
+.form-input {
+  color: $dark-blue;
+}
+
+.form-label {
+  color: $dark-blue;
+}
+
+.form-control {
+  color: $dark-blue;
+
+  &:focus {
+    color: $light-blue;
+  }
+}
