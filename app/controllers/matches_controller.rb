@@ -18,6 +18,7 @@ class MatchesController < ApplicationController
     @matche = Matche.new
     @matche.ride = @ride
     @matche.user = current_user
+    authorize @matche
     if @matche.save
       redirect_to ride_path(@ride)
     else

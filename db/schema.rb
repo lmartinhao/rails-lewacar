@@ -45,7 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_23_211637) do
   create_table "matches", force: :cascade do |t|
     t.bigint "ride_id", null: false
     t.bigint "user_id", null: false
-    t.boolean "finished"
+    t.boolean "finished", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ride_id"], name: "index_matches_on_ride_id"

@@ -1,28 +1,62 @@
 <h2>Reservar</h2>
 
-<div class="card shadow">
-  <div class="card-header">
-    <i class="fa-regular fa-map"></i> Confirmar reserva carona com <%= @ride.user.first_name %> </strong>
+
+<div class="row align-items-start">
+  <div class="col-8">
+
+
+
+    <div class="card shadow">
+      <div class="card-header">
+        <i class="fa-regular fa-map"></i> Confirmar reserva carona com <%= @ride.user.first_name %> </strong>
+      </div>
+      <div class="card-body mt-3">
+        <h4 class="card-title"><i class="fa-regular fa-calendar"></i> <%= @ride.date %></h4>
+        <p class="card-text"><i class="fa-solid fa-location-dot"></i> Ponto de encontro em <strong><%= @ride.pickup_address %></strong> às <strong><%= @ride.time.strftime('%H:%M') %></strong></li></p>
+        <div class="value-box d-flex justify-content-center rounded" style="width: 80px;">
+          <li class="list-group-item"><i class="fa-solid fa-dollar-sign"></i> <%= @ride.price %></li>
+        </div>
+        <div class="availability-box d-flex justify-content-start mt-2">
+          <li class="list-group-item"><i class="fa-solid fa-users"></i> <%= @ride.passengers %> assentos no veiculo. Reservados: <%= @matches.count%></li>
+        </div>
+        <div class="mt-5">
+          <% if @can_matche%>
+            <%= simple_form_for [@ride, @matche] do |f| %>
+
+              <%= f.button :submit, class: 'btn btn-primary mt-3'  unless current_user.id == @ride.user.id%>
+            <% end%>
+          <% else%>
+            <p>Reserva já realizada</p>
+          <% end%>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
   </div>
-  <div class="card-body mt-3">
-    <h4 class="card-title"><i class="fa-regular fa-calendar"></i> <%= @ride.date %></h4>
-    <p class="card-text"><i class="fa-solid fa-location-dot"></i> Ponto de encontro em <strong><%= @ride.pickup_address %></strong> às <strong><%= @ride.time.strftime('%H:%M') %></strong></li></p>
-    <div class="value-box d-flex justify-content-center rounded" style="width: 80px;">
-      <li class="list-group-item"><i class="fa-solid fa-dollar-sign"></i> <%= @ride.price %></li>
-    </div>
-    <div class="availability-box d-flex justify-content-start mt-2">
-      <li class="list-group-item"><i class="fa-solid fa-users"></i> <%= @ride.passengers %> assentos no veiculo. Reservados: <%= @matches.count%></li>
-    </div>
-    <div class="mt-5">
-      <% if @can_matche%>
-        <%= simple_form_for [@ride, @matche] do |f| %>
+  <div class="col-4">
+    <div class="card shadow">
+      <div class="card-header">
+        <i class="fa-regular fa-map"></i> Forma de Pagamento  </strong>
+      </div>
+      <div class="card-body mt-3">
+        <p class="card-text"><i class="fa-solid fa-option-dot"></i> Opções de Pagamento
 
-          <%= f.button :submit, class: 'btn btn-primary mt-3'  unless current_user.id == @ride.user.id%>
-        <% end%>
-      <% else%>
-        <p>Reserva já realizada</p>
-      <% end%>
+        <div class="availability-box d-flex justify-content-start mt-2">
+          <li class="list-group-item"><i class="fa-solid fa-users"></i> <%= @ride.passengers %> assentos no veiculo. Reservados: <%= @matches.count%></li>
+        </div>
+        <div class="mt-5">
+          <% if @can_matche%>
+            <%= link_to "Pix!", new_ride_match_path(@ride), class: "btn btn-success" unless current_user.id == @ride.user.id %>
+          <% else%>
+            <p>Reserva já realizada</p>
+          <% end%>
 
+        </div>
+      </div>
     </div>
   </div>
 </div>
