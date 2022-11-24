@@ -16,7 +16,7 @@
             <li class="list-group-item"><i class="fa-solid fa-users"></i> <%= @ride.passengers %> assentos disponíveis para esta corrida.</li>
           </div>
           <div class="mt-5">
-            <%= link_to "Reservar!", new_ride_match_path(@ride), class: "btn btn-success"%>
+            <%= link_to "Reservar!", new_ride_match_path(@ride), class: "btn btn-success" unless current_user.id == @ride.user.id %>
           </div>
         </div>
       </div>
