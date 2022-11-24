@@ -8,15 +8,17 @@
     <%= f.error_notification %>
 
     <div class="form-inputs">
-      <%= f.input :route,
+      <%= f.input :route, label: 'Ponto de partida',
                   required: true,
                   autofocus: true,
                   input_html: { autocomplete: "" }%>
+      <%= f.input :pickup_address, label: 'Ponto de chegada',
+                  required: true%>
+      <%= f.number_field :passengers, label: 'Quantidade de Passagueiros',
+                  required: true, wrapper_html: { class: 'passengers' }%>
       <%= f.date_field :date,
                   required: true%>
       <%= f.input :price,
-                  required: true%>
-      <%= f.input :pickup_address,
                   required: true%>
       <%= f.time_field :time,
                   required: true%>

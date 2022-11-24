@@ -30,7 +30,7 @@
           </div>
           <div class="mt-5">
             <% if policy(@ride).edit? == false %>
-            <a href="#" class="btn btn-success">Reservar!</a>
+              <%= link_to "Reservar!", new_ride_match_path(@ride), class: "btn btn-success" unless current_user.id == @ride.user.id %>
             <% end %>
           </div>
         </div>

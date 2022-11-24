@@ -42,6 +42,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_23_211637) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "matches", force: :cascade do |t|
+    t.bigint "ride_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "finished", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ride_id"], name: "index_matches_on_ride_id"
+    t.index ["user_id"], name: "index_matches_on_user_id"
+  end
+
   create_table "rides", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.text "route"
@@ -75,5 +85,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_23_211637) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "matches", "rides"
+  add_foreign_key "matches", "users"
   add_foreign_key "rides", "users"
 end
