@@ -1,7 +1,7 @@
-<div class="container py-5">
+<div class="container py-5" style="width: 84%;">
 
   <div class="d-flex align-items-center justify-content-between mb-3">
-    <h3 class="title mb-0 mt-3">Caronas disponíveis</h3>
+    <h3 class="title mb-4 mt-3">Viaje para novos lugares!</h3>
     <%= link_to "Oferecer uma carona", new_ride_path, class: "btn btn-success btn-sm" if policy(Ride).new? %>
   </div>
   <div class="row d-flex justify-content-between">
@@ -19,7 +19,7 @@
         <ul class="list-group">
           <li class="list-group-item"><i class="fa-regular fa-calendar"></i> <%= ride.date %></li>
           <li class="list-group-item"><i class="fa-solid fa-location-dot"></i> <%= ride.pickup_address %></li>
-          <li class="list-group-item"><i class="fa-regular fa-clock"></i> <%#= ride.time.strftime('%H:%M') %></li>
+          <li class="list-group-item"><i class="fa-regular fa-clock"></i> <%= ride.time.strftime('%H:%M') %></li>
         </ul>
         <div class="card-body">
           <%= link_to "Mais detalhes", ride_path(ride), class: "btn btn-primary d-grid" %>

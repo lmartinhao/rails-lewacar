@@ -6,34 +6,43 @@
         <div class="card-header">
           <i class="fa-regular fa-map"></i> <%= @ride.route %> com <strong><%= @ride.user.first_name %></strong>
         </div>
-        <div class="card-body mt-3">
-          <h4 class="card-title"><i class="fa-regular fa-calendar"></i> <%= @ride.date %></h4>
-        </div>
 
         <div class="container d-flex align-items-center flex-column">
+          <div class="container d-flex align-items-center flex-row">
 
-          <div style="width: 70%; height: 400px;"
-            data-controller="map"
-            data-map-markers-value="<%= @markers.to_json %>"
-            data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+            <div class="rounded mt-3" style="width: 50%; height: 300px;"
+              data-controller="map"
+              data-map-markers-value="<%= @markers.to_json %>"
+              data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+            </div>
+            <div class="d-flex align-items-center flex-column">
+              <div class="card-body mt-2">
+                <h4 class="card-title"><i class="fa-regular fa-calendar"></i> <%= @ride.date %></h4>
+              </div>
+              <div>
+                <%= cl_image_tag @ride.user.avatar.key, crop: :thumb, gravity: :face, class: "avatar" %><p><strong><%= @ride.user.first_name %></strong> está oferecendo esta carona</p>
+              </div>
+              <div class="value-box rounded mt-2 mb-3">
+                <i class="fa-solid fa-dollar-sign"></i> <strong><%= @ride.price %></strong>
+              </div>
+              <div>
+                <p style="width: 90%;"><i class="fa-solid fa-location-dot"></i> Ponto de encontro em <strong><%= @ride.pickup_address %></strong> às <strong><%= @ride.time.strftime('%H:%M') %></strong></li></p>
+              </div>
+            </div>
           </div>
 
-          <p class="card-text"><i class="fa-solid fa-location-dot"></i> Ponto de encontro em <strong><%= @ride.pickup_address %></strong> às <strong><%= @ride.time.strftime('%H:%M') %></strong></li></p>
-          <div class="value-box rounded" style="width: 80px;">
-            <li class="list-group-item"><i class="fa-solid fa-dollar-sign"></i> <%= @ride.price %></li>
-          </div>
-
-
-
-          <div class="availability-box d-flex justify-content-start mt-2">
+          <div class="availability-box mt-3">
             <li class="list-group-item"><i class="fa-solid fa-users"></i> <%= @ride.passengers %> assentos disponíveis para esta corrida.</li>
           </div>
-          <div class="mt-5">
+
+          <div class="d-grid mt-3 mb-3">
             <% if policy(@ride).edit? == false %>
               <%= link_to "Reservar!", new_ride_match_path(@ride), class: "btn btn-success" unless current_user.id == @ride.user.id %>
             <% end %>
           </div>
+
         </div>
+
       </div>
 
       <div>
