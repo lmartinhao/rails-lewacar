@@ -7,7 +7,7 @@ class RidesController < ApplicationController
     @rides = policy_scope(Ride)
 
     if params[:query].present?
-      @rides = Ride.where("route ILIKE ?", "%#{params[:query]}%")
+      @rides = Ride.where("route @@ ?", "%#{params[:query]}%")
     else
       @rides = Ride.all
     end
@@ -18,7 +18,7 @@ class RidesController < ApplicationController
     @markers = [{ lat: @ride.latitude, lng: @ride.longitude }]
 
     if params[:query].present?
-      @rides = Ride.where("route ILIKE ?", "%#{params[:query]}%")
+      @rides = Ride.where("route @@ ?", "%#{params[:query]}%")
     else
       @rides = Ride.all
     end
