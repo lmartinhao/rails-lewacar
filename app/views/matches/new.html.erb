@@ -22,7 +22,7 @@
         <div class="mt-5">
           <% if @can_matche%>
             <%= simple_form_for [@ride, @matche] do |f| %>
-
+              <%= f.input :transaction_pix %>
               <%= f.button :submit, class: 'btn btn-primary mt-3'  unless current_user.id == @ride.user.id%>
             <% end%>
           <% else%>

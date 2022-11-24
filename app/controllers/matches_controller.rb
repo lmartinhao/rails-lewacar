@@ -19,7 +19,7 @@ class MatchesController < ApplicationController
 
   def create
     @ride = Ride.find(params[:ride_id])
-    @matche = Matche.new
+    @matche = Matche.new(matche_params)
     @matche.ride = @ride
     @matche.user = current_user
     authorize @matche
@@ -31,6 +31,10 @@ class MatchesController < ApplicationController
   end
 
   private
+
+  def matche_params
+    params.require(:matche).permit(:transaction_pix)
+  end
 
   def set_ride
     @ride = Ride.find(params[:ride_id])
