@@ -17,4 +17,8 @@
 .navbar-brand {
   font-size: xx-large;
   color: white;
+
+  &:hover {
+    color: $light-blue;
+  }
 }

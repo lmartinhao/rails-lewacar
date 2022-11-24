@@ -2,17 +2,17 @@
     <%= f.error_notification %>
 
     <div class="form-inputs">
-      <%= f.input :route
+      <%= f.input :route, label: 'Destino',
                   required: true,
                   autofocus: true,
                   input_html: { autocomplete: "email" }%>
-      <%= f.date_field :date,
+      <%= f.date_field :date, label: 'Data',
                   required: true%>
-      <%= f.input :price,
+      <%= f.input :price, label: 'Valor da corrida',
                   required: true%>
-      <%= f.input :pickup_address,
+      <%= f.input :pickup_address, label: 'Ponto de partida',
                   required: true%>
-      <%= f.time_field :time,
+      <%= f.time_field :time, label: 'Horário',
                   required: true%>
     </div>
 

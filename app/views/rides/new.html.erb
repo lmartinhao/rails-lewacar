@@ -1,7 +1,7 @@
-<div class="container" style="max-width: 50%;">
+<div class="container mb-5" style="max-width: 50%;">
 
   <div class="title my-4">
-    <h2>Cadastre-se!</h2>
+    <h2><mark>Ofereça uma carona</mark></h2>
   </div>
 
   <%= simple_form_for @ride do |f| %>
@@ -10,17 +10,17 @@
     <div class="form-inputs">
       <%= f.input :pickup_address, label: 'Ponto de partida',
                   required: true%>
-      <%= f.input :route, label: 'Ponto de chegada',
+      <%= f.input :route, label: 'Destino',
                   required: true,
                   autofocus: true,
-                  input_html: { autocomplete: "" }%>
+                  input_html: { autocomplete: "" } %>
       <%= f.number_field :passengers, label: 'Quantidade de Passageiros',
-                  required: true, wrapper_html: { class: 'passengers' }%>
-      <%= f.date_field :date,
+                  required: true, wrapper_html: { class: 'passengers' } %>
+      <%= f.date_field :date, label: 'Data da carona',
                   required: true%>
-      <%= f.input :price,
+      <%= f.input :price, label: 'Preço a ser cobrado',
                   required: true%>
-      <%= f.time_field :time,
+      <%= f.time_field :time, label: 'Horário',
                   required: true%>
     </div>
 
