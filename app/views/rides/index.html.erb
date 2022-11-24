@@ -17,13 +17,13 @@
   <div class="row d-flex justify-content-between">
     <% @rides.each do |ride| %>
       <div class="card mb-5 shadow" style="width: 18rem;">
-        <div class="card-body">
-          <div class="title text-center">
+        <div class="card-body text-center">
+          <div class="title">
             Viagem com <%= ride.user.first_name %>
           </div>
           <div>
             <hr>
-            <i class="fa-regular fa-map"></i> <%= ride.route %>
+            <i class="fa-regular fa-map"></i> Indo para <strong><%= ride.route %></strong>
           </div>
         </div>
         <ul class="list-group">

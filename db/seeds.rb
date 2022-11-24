@@ -8,6 +8,39 @@
 require "open-uri"
 
 @users = []
+@routes = [
+  "Cristo Redentor",
+  "Parque Lage, Jardim Botânico",
+  "Pão de Açucar, Urca",
+  "Praia de Copacabana",
+  "Arcos da Lapa, Rio de Janeiro",
+  "Pedra da Gávea",
+  "Estádio do Maracanã",
+  "Elevador Lacerda",
+  "Cataratas do Iguaçu",
+  "Chapada dos Veadeiros",
+  "Aeroporto Internacional de Guarulhos",
+  "Aeroporto de Congonhas",
+  "Aeroporto de Viracopos",
+  "Aeroporto Internacional Galeão",
+  "Parque Ibirapuera",
+  "MASP",
+  "Museu do Amanhão, Rio de Janeiro",
+  "Beach Park, Fortaleza",
+  "Jardim Botânico de Curitiba"
+]
+
+@address = [
+  "Avenida Paulista, 1000, São Paulo",
+  "Alameda Yayá, 310, Guarulhos",
+  "Rua Bartira, 1350, São Paulo",
+  "Rua Gustavo Sampaio, 676, Rio de Janeiro",
+  "Avenida Nossa Senhora de Copacabana, 335, Rio de Janeiro",
+  "Avenida das Nações Unidas, 14401, São Paulo",
+  "Rua General Goes Monteiro, 8, Rio de Janeiro",
+  "Rua das Figueiras, 64, Cajamar",
+  "Rua Djalma Dutra, 701, Botucatu"
+]
 
 puts 'Cleaning database'
 User.destroy_all
@@ -31,13 +64,13 @@ end
 
 puts 'Creating master user'
 
-100.times do
+12.times do
   ride = Ride.create(
     user: @users.sample,
-    route: "#{Faker::Address.street_name} até #{Faker::Address.street_name}",
+    route: @routes.sample,
     date: Faker::Date.forward(days: 7),
     price: rand(10..100),
-    pickup_address: Faker::Address.street_name,
+    pickup_address: @address.sample,
     time: Faker::Time.forward(days: 7, period: %i[evening morning].sample, format: :short),
     passengers: rand(1..4)
   )
