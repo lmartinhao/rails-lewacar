@@ -5,6 +5,15 @@ class RidesController < ApplicationController
 
   def index
     @rides = policy_scope(Ride)
+
+    # The `geocoded` scope filters only flats with coordinates
+    @markers = @rides.geocoded.map do |ride|
+      {
+        lat: ride.latitude,
+        lng: ride.longitude,
+        info_window: render_to_string(partial: "info_window", locals: {ride: ride})
+      }
+    end
   end
 
   def show

@@ -5,6 +5,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+require "open-uri"
+
 @users = []
 
 puts 'Cleaning database'
@@ -13,6 +15,7 @@ User.destroy_all
 puts 'Creating users'
 
 30.times do
+  file = URI.open("https://source.unsplash.com/featured/?profile")
   @user = User.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -20,6 +23,8 @@ puts 'Creating users'
     age: rand(18..40),
     password: "123123"
   )
+  @user.avatar.attach(io: file, filename: "nes.png", content_type: "image/png")
+  @user.save
   @users << @user
   puts "user with id: #{@user.id} has been created"
 end

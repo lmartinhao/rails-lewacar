@@ -20,7 +20,7 @@
             <%= link_to "Nova carona", new_ride_path, class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
-            <%= cl_image_tag current_user.avatar.key, height: 50, width: 50, crop: :fill, gravity: :face, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <%= cl_image_tag current_user.avatar.key, crop: :thumb, gravity: :face, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Meu perfil", "#", class: "dropdown-item" %>
               <%= link_to "Editar", edit_user_registration_path(current_user), class: "dropdown-item" %>

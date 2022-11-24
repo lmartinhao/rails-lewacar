@@ -8,15 +8,30 @@
         </div>
         <div class="card-body mt-3">
           <h4 class="card-title"><i class="fa-regular fa-calendar"></i> <%= @ride.date %></h4>
+        </div>
+
+        <div class="container d-flex align-items-center flex-column">
+
+          <div class="" style="width: 70%; height: 400px;"
+            data-controller="map"
+            data-map-markers-value="<%= @markers.to_json %>"
+            data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+          </div>
+
           <p class="card-text"><i class="fa-solid fa-location-dot"></i> Ponto de encontro em <strong><%= @ride.pickup_address %></strong> às <strong><%= @ride.time.strftime('%H:%M') %></strong></li></p>
-          <div class="value-box d-flex justify-content-center rounded" style="width: 80px;">
+          <div class="value-box rounded" style="width: 80px;">
             <li class="list-group-item"><i class="fa-solid fa-dollar-sign"></i> <%= @ride.price %></li>
           </div>
+
+
+
           <div class="availability-box d-flex justify-content-start mt-2">
             <li class="list-group-item"><i class="fa-solid fa-users"></i> <%= @ride.passengers %> assentos disponíveis para esta corrida.</li>
           </div>
           <div class="mt-5">
-            <%= link_to "Reservar!", new_ride_match_path(@ride), class: "btn btn-success" unless current_user.id == @ride.user.id %>
+            <% if policy(@ride).edit? == false %>
+            <a href="#" class="btn btn-success">Reservar!</a>
+            <% end %>
           </div>
         </div>
       </div>
