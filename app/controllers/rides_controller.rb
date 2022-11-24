@@ -5,11 +5,23 @@ class RidesController < ApplicationController
 
   def index
     @rides = policy_scope(Ride)
+
+    if params[:query].present?
+      @rides = Ride.where("route ILIKE ?", "%#{params[:query]}%")
+    else
+      @rides = Ride.all
+    end
   end
 
   def show
     authorize @ride
-    @markers = [{lat: @ride.latitude, lng: @ride.longitude}]
+    @markers = [{ lat: @ride.latitude, lng: @ride.longitude }]
+
+    if params[:query].present?
+      @rides = Ride.where("route ILIKE ?", "%#{params[:query]}%")
+    else
+      @rides = Ride.all
+    end
   end
 
   def new
