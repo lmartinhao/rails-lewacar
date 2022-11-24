@@ -1,59 +1,54 @@
-<h2>Reservar</h2>
+<div class="container mt-5 mb-5">
 
+  <div class="row align-items-start">
+    <div class="col-7">
 
-<div class="row align-items-start">
-  <div class="col-7">
-
-
-
-    <div class="card shadow">
-      <div class="card-header">
-        <i class="fa-regular fa-map"></i> Confirmar reserva carona com <%= @ride.user.first_name %> </strong>
-      </div>
-      <div class="card-body mt-3">
-        <h4 class="card-title"><i class="fa-regular fa-calendar"></i> <%= @ride.date %></h4>
-        <p class="card-text"><i class="fa-solid fa-location-dot"></i> Ponto de encontro em <strong><%= @ride.pickup_address %></strong> às <strong><%= @ride.time.strftime('%H:%M') %></strong></li></p>
-        <div class="value-box d-flex justify-content-center rounded" style="width: 80px;">
-          <li class="list-group-item"><i class="fa-solid fa-dollar-sign"></i> <%= @ride.price %></li>
+      <div class="card shadow">
+        <div class="card-header">
+          <i class="fa-solid fa-check"></i> Confirmar carona com <strong><%= @ride.user.first_name %> </strong>
         </div>
-        <div class="availability-box d-flex justify-content-start mt-2">
-          <li class="list-group-item"><i class="fa-solid fa-users"></i> <%= @ride.passengers %> assentos no veiculo. Reservados: <%= @matches.count%></li>
-        </div>
-        <div class="mt-5">
-          <% if @can_matche%>
-            <%= simple_form_for [@ride, @matche] do |f| %>
-              <%= f.input :transaction_pix %>
-              <%= f.button :submit, class: 'btn btn-primary mt-3'  unless current_user.id == @ride.user.id%>
+        <div class="card-body mt-3">
+          <h4 class="card-title"><i class="fa-regular fa-calendar"></i> <%= @ride.date %></h4>
+          <p class="card-text"><i class="fa-solid fa-location-dot"></i> Ponto de encontro em <strong><%= @ride.pickup_address %></strong> às <strong><%= @ride.time.strftime('%H:%M') %></strong></li></p>
+          <div class="value-box d-flex justify-content-center rounded" style="width: 80px;">
+            <li class="list-group-item"><i class="fa-solid fa-dollar-sign"></i> <%= @ride.price %></li>
+          </div>
+          <div class="availability-box d-flex justify-content-start mt-2">
+            <li class="list-group-item"><i class="fa-solid fa-users"></i> <%= @ride.passengers %> assentos no veiculo. Reservados: <%= @matches.count%></li>
+          </div>
+          <div class="mt-5">
+            <% if @can_matche%>
+              <%= simple_form_for [@ride, @matche] do |f| %>
+                <%= f.input :transaction_pix %>
+                <%= f.button :submit, class: 'btn btn-primary mt-3'  unless current_user.id == @ride.user.id%>
+              <% end%>
+            <% else%>
+              <p>Reserva já realizada</p>
             <% end%>
-          <% else%>
-            <p>Reserva já realizada</p>
-          <% end%>
 
+          </div>
         </div>
       </div>
     </div>
 
+    <div class="col-5">
+      <div class="card shadow">
+        <div class="card-header">
+          <i class="fa-solid fa-wallet"></i> Forma de Pagamento
+        </div>
+        <div class="card-body mt-3">
+          <p class="card-text text-center"><i class="fa-solid fa-option-dot"></i> Opções de <strong>Pix</strong> disponível
+          <div class="mt-5 text-center">
+            <% if @can_matche%>
+              <div class="mb-4">
+                <%= text_field :ecard, :sender, :value => @pix.payload, :size=>"45" %>
+              </div>
+              <%= image_tag @pix.base64, height: 200 %>
+            <% else%>
+              <p><strong>Reserva já realizada</strong></p>
+            <% end%>
 
-
-
-  </div>
-  <div class="col-5">
-    <div class="card shadow">
-      <div class="card-header">
-        <i class="fa-regular fa-map"></i> Forma de Pagamento  </strong>
-      </div>
-      <div class="card-body mt-3">
-        <p class="card-text"><i class="fa-solid fa-option-dot"></i> Opções de Pagamento
-        <div class="mt-5">
-          <% if @can_matche%>
-          <div class="mb-4">
-            <%= text_field :ecard, :sender, :value => @pix.payload, :size=>"45" %>
-            </div>
-            <%= image_tag @pix.base64, height: 300 %>
-          <% else%>
-            <p>Reserva já realizada</p>
-          <% end%>
-
+          </div>
         </div>
       </div>
     </div>
