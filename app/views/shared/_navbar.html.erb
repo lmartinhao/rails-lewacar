@@ -1,20 +1,25 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
-    <div class="px-2">
-      <%= link_to rides_path, class: "navbar-brand" do %>
-        <i class="fa-solid fa-car"></i>
-      <% end %>
+<div class="navbar fixed-top navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="d-flex col-2 pt-3 px-2">
+   <div>
+    <%= link_to rides_path, class: "navbar-brand" do %>
+      <i class="fa-solid fa-car"></i>
+    <% end %>
     </div>
+    <div class="logo">
+    <p>Le WaCar</b>
+    </div>
+  </div>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <div class="container-fluid justify-content-end">
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <%= link_to "Caronas", rides_path, class: "nav-link" %>
+            <%= link_to "Todas as caronas", rides_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "Minhas caronas", rides_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
             <%= link_to "Nova carona", new_ride_path, class: "nav-link" %>
@@ -22,17 +27,23 @@
           <li class="nav-item dropdown">
             <%= cl_image_tag current_user.avatar.key, crop: :thumb, gravity: :face, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Meu perfil", "#", class: "dropdown-item" %>
-              <%= link_to "Editar", edit_user_registration_path(current_user), class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+              <%= link_to "Editar perfil", edit_user_registration_path(current_user), class: "dropdown-item" %>
+              <%= link_to "Sair", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            <%= link_to "Faça seu cadastro", new_user_registration_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Entrar", new_user_session_path, class: "nav-link" %>
           </li>
         <% end %>
       </ul>
     </div>
   </div>
+</div>
+
+<div class="mt-5">
+  <%= render "shared/banner" %>
 </div>
