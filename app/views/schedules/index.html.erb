@@ -3,11 +3,13 @@
   <div class="row d-flex justify-content-between">
     <% @rides.each do |ride| %>
       <div class="card mb-4">
-        <h5 class="card-header"><strong><%= ride.id %> - <%= ride.date.strftime('%d/%m/%Y') %></strong></h5>
+        <h5 class="card-header"><strong><%= ride.date.strftime('%d/%m/%Y') %></strong></h5>
         <div class="card-body">
           <h5 class="card-title"><%= ride.pickup_address.capitalize %> para <%= ride.route.capitalize %></h5>
-          <p class="card-text">Horário: <%= ride.ride_time.strftime('%H:%m no dia %d/%m/%Y') %></p>
+          <p class="card-text">Horário: <%= ride.ride_time.strftime('%H:%m') %> no dia <%= ride.date.strftime('%d/%m/%Y') %></p>
           <p class="card-text">Preço: <%= ride.price %></p>
+          <p class="card-text">Número de vagas: <%= ride.passengers %></p>
+          <p class="card-text">Vago: <%= ride.passengers - ride.matches.size %></p>
           <h5 class="card-title">Caroneiros:</h5>
           <div class="list-group mb-5">
             <% ride.matches.each do |mtch| %>
