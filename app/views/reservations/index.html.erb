@@ -1,0 +1,48 @@
+<div class="container py-5" style="width: 70%;">
+
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h3 class="title mb-4 mt-3">Minhas reservas</h3>
+    <%= link_to "Encontrar novas viagens", rides_path, class: "btn btn-primary btn-sm" if policy(Ride).new? %>
+  </div>
+  <div class="row d-flex justify-content-between">
+    <% @matches.each do |match| %>
+
+    <div class="card shadow px-0">
+      <div class="card-header">
+        <%= cl_image_tag match.ride.user.avatar.key, crop: :thumb, gravity: :face, class: "avatar-sm" %>
+        Viagem para <strong><%= match.ride.route %></strong> com <strong><%= match.ride.user.first_name %> <%= match.ride.user.last_name %></strong>
+      </div>
+      <div class="card-body d-flex justify-content-center">
+
+        <div class="col-7">
+          <h5 class="card-title"><i class="fa-regular fa-calendar"></i> <%= match.ride.date.strftime('%d/%m/%Y') %></h5>
+          <p><i class="fa-solid fa-location-dot"></i> Ponto de encontro em <strong><%= match.ride.pickup_address %></strong> às <mark><%= match.ride.ride_time.strftime('%H:%M') %></mark></p>
+          <% if match.finished? %>
+            <p>Status da viagem: <i class="fa-solid fa-square-check"></i> Confirmada!</p>
+            <% else %>
+            <p>Status da viagem: <i class="fa-solid fa-triangle-exclamation"></i> Aguardando confirmação</p>
+          <% end %>
+          <div class="text-center">
+            <a href="" class="btn btn-info btn-sm">Ir para perfil de <%= match.ride.user.first_name %></a>
+          </div>
+        </div>
+
+        <div class="col-4 text-center">
+          <h5 class="card-title"><i class="fa-solid fa-suitcase"></i> Viajantes desta corrida</h5>
+
+          <div class="mt-4 d-flex justify-content-center">
+          <%#= cl_image_tag match.ride.matches.user.avatar.key, crop: :thumb, gravity: :face, class: "avatar-sm" %>
+            <% match_rides = match.ride.matches.all %>
+            <% match_rides.each do |match_ride| %>
+              <div>
+              <%= cl_image_tag match_ride.user.avatar.key, crop: :thumb, gravity: :face, class: "avatar" %>
+              <p><strong><%= match_ride.user.first_name %></strong></p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

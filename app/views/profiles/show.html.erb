@@ -1,0 +1,18 @@
+<div class="container mt-5" style="max-width: 70%">
+
+  <div class="d-flex justify-content-start mb-4">
+    <div class="mx-3">
+      <%= cl_image_tag @user.avatar.key, crop: :thumb, gravity: :face, class: "avatar-lg" %>
+    </div>
+    <div>
+      <h1 class="align-center"><strong><%= @user.full_name %></strong></h1>
+      <%= link_to "Editar perfil", edit_user_registration_path(@user), class: "btn btn-primary btn-sm" %>
+    </div>
+  </div>
+  <div class="card text-center">
+    <div class="card-header mb-3">
+      Veja o que estão falando sobre mim</strong>
+    </div>
+  </div>
+  <%= render "rides/reviews" %>
+</div>

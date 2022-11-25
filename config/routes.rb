@@ -1,13 +1,17 @@
 Rails.application.routes.draw do
   resources :schedules, only: %i[index update]
-  #get 'schedules', to: "schedules#index"
-  #post 'schedule/:id', to: "schedules#status"
+
+  resources :profiles
+
   devise_for :users
 
   resources :rides do
-    resources :matches, only: [:new, :create]
+    resources :matches, only: %i[new create]
   end
+
   root to: "rides#index"
+
+  get "reservations", to: "reservations#index"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
