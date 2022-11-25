@@ -19,7 +19,7 @@
         <ul class="list-group">
           <li class="list-group-item"><i class="fa-regular fa-calendar"></i> <%= ride.date %></li>
           <li class="list-group-item"><i class="fa-solid fa-location-dot"></i> <%= ride.pickup_address %></li>
-          <li class="list-group-item"><i class="fa-regular fa-clock"></i> <%= ride.time.strftime('%H:%M') %></li>
+          <li class="list-group-item"><i class="fa-regular fa-clock"></i> <%#= ride.ride_time.strftime('%H:%M')%></li>
         </ul>
         <div class="card-body">
           <%= link_to "Mais detalhes", ride_path(ride), class: "btn btn-primary d-grid" %>

@@ -9,7 +9,7 @@
         </div>
         <div class="card-body mt-3">
           <h4 class="card-title"><i class="fa-regular fa-calendar"></i> <%= @ride.date %></h4>
-          <p class="card-text"><i class="fa-solid fa-location-dot"></i> Ponto de encontro em <strong><%= @ride.pickup_address %></strong> às <strong><%= @ride.time.strftime('%H:%M') %></strong></li></p>
+          <p class="card-text"><i class="fa-solid fa-location-dot"></i> Ponto de encontro em <strong><%= @ride.pickup_address %></strong> às <strong><%= @ride.ride_time.strftime('%H:%M') %></strong></li></p>
           <div class="value-box d-flex justify-content-center rounded" style="width: 80px;">
             <li class="list-group-item"><i class="fa-solid fa-dollar-sign"></i> <%= @ride.price %></li>
           </div>
@@ -17,8 +17,8 @@
             <li class="list-group-item"><i class="fa-solid fa-users"></i> <%= @ride.passengers %> assentos no veiculo. Reservados: <%= @matches.count%></li>
           </div>
           <div class="mt-5">
-            <% if @can_matche%>
-              <%= simple_form_for [@ride, @matche] do |f| %>
+            <% if @can_match%>
+              <%= simple_form_for [@ride, @match] do |f| %>
                 <%= f.input :transaction_pix %>
                 <%= f.button :submit, class: 'btn btn-primary mt-3'  unless current_user.id == @ride.user.id%>
               <% end%>
@@ -39,7 +39,7 @@
         <div class="card-body mt-3">
           <p class="card-text text-center"><i class="fa-solid fa-option-dot"></i> Opções de <strong>Pix</strong> disponível
           <div class="mt-5 text-center">
-            <% if @can_matche%>
+            <% if @can_match%>
               <div class="mb-4">
                 <%= text_field :ecard, :sender, :value => @pix.payload, :size=>"45" %>
               </div>

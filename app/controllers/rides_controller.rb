@@ -68,7 +68,7 @@ class RidesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def ride_params
-    params.require(:ride).permit(:user, :route, :date, :price, :pickup_address, :time, :passengers)
+    params.require(:ride).permit(:user, :route, :date, :price, :pickup_address, :ride_time, :passengers)
   end
 
   def verify_policy_scope

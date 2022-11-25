@@ -71,7 +71,7 @@ puts 'Creating master user'
     date: Faker::Date.forward(days: 7),
     price: rand(10..100),
     pickup_address: @address.sample,
-    time: Faker::Time.forward(days: 7, period: %i[evening morning].sample, format: :short),
+    ride_time: Faker::Time.forward(days: 7, period: %i[evening morning].sample, format: :short),
     passengers: rand(1..4)
   )
   puts "Ride with id: #{ride.id} has been created"
