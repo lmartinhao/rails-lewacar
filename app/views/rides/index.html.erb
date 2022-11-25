@@ -6,25 +6,28 @@
   </div>
   <div class="row d-flex justify-content-between">
     <% @rides.each do |ride| %>
-      <div class="card mb-5 shadow" style="width: 18rem;">
-        <div class="card-body text-center">
-          <div class="title">
-            <%= cl_image_tag ride.user.avatar.key, crop: :thumb, gravity: :face, class: "avatar-sm" %> Viagem com <%= ride.user.first_name %>
+      <% if ride.passengers - ride.matches.count > 0 %>
+        <div class="card mb-5 shadow" style="width: 18rem;">
+          <div class="card-body text-center">
+            <div class="title">
+              <%= cl_image_tag ride.user.avatar.key, crop: :thumb, gravity: :face, class: "avatar-sm" %> <small>Viagem com </small><%= ride.user.first_name %>
+            </div>
+            <div>
+              <hr>
+              <i class="fa-regular fa-map"></i> <small>Indo para </small><strong><%= ride.route %></strong>
+            </div>
           </div>
-          <div>
-            <hr>
-            <i class="fa-regular fa-map"></i> Indo para <strong><%= ride.route %></strong>
+          <ul class="list-group"><small>
+            <li class="list-group-item"><i class="fa-regular fa-calendar"></i> <%= ride.date %></li>
+            <li class="list-group-item"><i class="fa-solid fa-location-dot"></i> <%= ride.pickup_address %></li>
+            <li class="list-group-item"><i class="fa-regular fa-clock"></i> <%= ride.ride_time.strftime('%H:%M')%></li>
+            <li class="list-group-item text-center"><i class="fa-solid fa-user"></i> <%= ride.passengers - ride.matches.count   %> assentos disponíveis</li></small>
+          </ul>
+          <div class="card-body">
+            <%= link_to "Mais detalhes", ride_path(ride), class: "btn btn-primary d-grid" %>
           </div>
         </div>
-        <ul class="list-group"><small>
-          <li class="list-group-item"><i class="fa-regular fa-calendar"></i> <%= ride.date %></li>
-          <li class="list-group-item"><i class="fa-solid fa-location-dot"></i> <%= ride.pickup_address %></li>
-          <li class="list-group-item"><i class="fa-regular fa-clock"></i> <%= ride.ride_time.strftime('%H:%M')%></li></small>
-        </ul>
-        <div class="card-body">
-          <%= link_to "Mais detalhes", ride_path(ride), class: "btn btn-primary d-grid" %>
-        </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 </div>

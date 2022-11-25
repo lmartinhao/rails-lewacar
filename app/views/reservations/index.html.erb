@@ -7,7 +7,7 @@
   <div class="row d-flex justify-content-between">
     <% @matches.each do |match| %>
 
-    <div class="card shadow px-0">
+    <div class="card shadow px-0 my-3">
       <div class="card-header">
         <%= cl_image_tag match.ride.user.avatar.key, crop: :thumb, gravity: :face, class: "avatar-sm" %>
         Viagem para <strong><%= match.ride.route %></strong> com <strong><%= match.ride.user.first_name %> <%= match.ride.user.last_name %></strong>
@@ -23,7 +23,7 @@
             <p>Status da viagem: <i class="fa-solid fa-triangle-exclamation"></i> Aguardando confirmação</p>
           <% end %>
           <div class="text-center">
-            <a href="" class="btn btn-info btn-sm">Ir para perfil de <%= match.ride.user.first_name %></a>
+            <%= link_to "Visitar perfil do motorista", profile_path(match.ride.user), class: "btn btn-primary btn-sm" %>
           </div>
         </div>
 
@@ -31,7 +31,6 @@
           <h5 class="card-title"><i class="fa-solid fa-suitcase"></i> Viajantes desta corrida</h5>
 
           <div class="mt-4 d-flex justify-content-center">
-          <%#= cl_image_tag match.ride.matches.user.avatar.key, crop: :thumb, gravity: :face, class: "avatar-sm" %>
             <% match_rides = match.ride.matches.all %>
             <% match_rides.each do |match_ride| %>
               <div>

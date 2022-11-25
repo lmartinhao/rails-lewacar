@@ -6,7 +6,9 @@
     </div>
     <div>
       <h1 class="align-center"><strong><%= @user.full_name %></strong></h1>
-      <%= link_to "Editar perfil", edit_user_registration_path(@user), class: "btn btn-primary btn-sm" %>
+      <% if policy(@user).edit? %>
+        <%= link_to "Editar perfil", edit_user_registration_path(@user), class: "btn btn-primary btn-sm" %>
+      <% end %>
     </div>
   </div>
   <div class="card text-center">

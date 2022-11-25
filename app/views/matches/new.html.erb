@@ -14,13 +14,13 @@
             <li class="list-group-item"><i class="fa-solid fa-dollar-sign"></i> <%= @ride.price %></li>
           </div>
           <div class="availability-box d-flex justify-content-start mt-2">
-            <li class="list-group-item"><i class="fa-solid fa-users"></i> <%= @ride.passengers %> assentos no veiculo. Reservados: <%= @matches.count%></li>
+            <li class="list-group-item"><i class="fa-solid fa-users"></i> <%= @ride.passengers - @matches.count %> assentos disponíveis | Reservados: <%= @matches.count %></li>
           </div>
           <div class="mt-5">
             <% if @can_match%>
               <%= simple_form_for [@ride, @match] do |f| %>
                 <%= f.input :transaction_pix %>
-                <%= f.button :submit, class: 'btn btn-primary mt-3'  unless current_user.id == @ride.user.id%>
+                <%= f.button :submit, "Confirmar pagamento", class: 'btn btn-primary mt-3'  unless current_user.id == @ride.user.id%>
               <% end%>
             <% else%>
               <p>Reserva já realizada</p>

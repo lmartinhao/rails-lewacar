@@ -8,6 +8,9 @@
 require "open-uri"
 
 @users = []
+
+@rides = []
+
 @routes = [
   "Cristo Redentor",
   "Parque Lage, Jardim Botânico",
@@ -28,7 +31,11 @@ require "open-uri"
   "Museu do Amanhã, Rio de Janeiro",
   "Beach Park, Fortaleza",
   "Jardim Botânico de Curitiba",
-  "Prai de Santos"
+  "Praia de Santos",
+  "Estádio do Morumbi",
+  "Praia de Jericoacoara",
+  "Búzios",
+  "Arraial do Cabo"
 ]
 
 @address = [
@@ -43,8 +50,13 @@ require "open-uri"
   "Rua Djalma Dutra, 701, Botucatu",
   "Rua Pedro Alexandre, 26, Guarulhos",
   "Avenida Atlântica, 100, São Bernardo do Campo",
-  "Rua Augusta, 300, São Paulo"
+  "Rua Augusta, 300, São Paulo",
+  "Avenida Governador Agamenon Magalhães, 10, Recife",
+  "Avenida Luíz Eduardo magalhães, 500, Salvador",
+  "Avenida Paulo Faccini, 150, Guarulhos"
 ]
+
+@status = [true, false]
 
 puts 'Cleaning database'
 User.destroy_all
@@ -66,10 +78,10 @@ puts 'Creating users'
   puts "user with id: #{@user.id} has been created"
 end
 
-puts 'Creating master user'
+puts 'Creating rides'
 
-16.times do
-  ride = Ride.create(
+20.times do
+  @ride = Ride.create(
     user: @users.sample,
     route: @routes.sample,
     date: Faker::Date.forward(days: 7),
@@ -78,5 +90,17 @@ puts 'Creating master user'
     ride_time: Faker::Time.forward(days: 7, period: %i[evening morning].sample, format: :short),
     passengers: rand(1..4)
   )
-  puts "Ride with id: #{ride.id} has been created"
+  @rides << @ride
+  puts "Ride with id: #{@ride.id} has been created"
+end
+
+puts 'Creating some matches'
+
+10.times do
+  match = Match.create(
+    user: @users.sample,
+    ride: @rides.sample,
+    finished: @status.sample
+  )
+  puts "Match with id: #{match.id} has been created"
 end
