@@ -25,9 +25,10 @@ require "open-uri"
   "Aeroporto Internacional Galeão",
   "Parque Ibirapuera",
   "MASP",
-  "Museu do Amanhão, Rio de Janeiro",
+  "Museu do Amanhã, Rio de Janeiro",
   "Beach Park, Fortaleza",
-  "Jardim Botânico de Curitiba"
+  "Jardim Botânico de Curitiba",
+  "Prai de Santos"
 ]
 
 @address = [
@@ -39,7 +40,10 @@ require "open-uri"
   "Avenida das Nações Unidas, 14401, São Paulo",
   "Rua General Goes Monteiro, 8, Rio de Janeiro",
   "Rua das Figueiras, 64, Cajamar",
-  "Rua Djalma Dutra, 701, Botucatu"
+  "Rua Djalma Dutra, 701, Botucatu",
+  "Rua Pedro Alexandre, 26, Guarulhos",
+  "Avenida Atlântica, 100, São Bernardo do Campo",
+  "Rua Augusta, 300, São Paulo"
 ]
 
 puts 'Cleaning database'
@@ -47,7 +51,7 @@ User.destroy_all
 
 puts 'Creating users'
 
-30.times do
+20.times do
   file = URI.open("https://source.unsplash.com/featured/?profile")
   @user = User.create(
     first_name: Faker::Name.first_name,
@@ -64,7 +68,7 @@ end
 
 puts 'Creating master user'
 
-12.times do
+16.times do
   ride = Ride.create(
     user: @users.sample,
     route: @routes.sample,
