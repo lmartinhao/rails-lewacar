@@ -1,4 +1,4 @@
-class MatchePolicy < ApplicationPolicy
+class MatchPolicy < ApplicationPolicy
   def new?
     true
   end

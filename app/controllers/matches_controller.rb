@@ -9,21 +9,21 @@ class MatchesController < ApplicationController
     if @ride.user.id == current_user.id
       redirect_to ride_path(@ride)
     else
-      @matches = Matche.where(ride_id: @ride) || Matche.new
-      @matche = Matche.new
-      @can_matche = can_matche?
+      @matches = Match.where(ride_id: @ride) || Match.new
+      @match = Match.new
+      @can_match = can_match?
       qrcode_pix
-      authorize @matche
+      authorize @match
     end
   end
 
   def create
     @ride = Ride.find(params[:ride_id])
-    @matche = Matche.new(matche_params)
-    @matche.ride = @ride
-    @matche.user = current_user
-    authorize @matche
-    if @matche.save
+    @match = Match.new(match_params)
+    @match.ride = @ride
+    @match.user = current_user
+    authorize @match
+    if @match.save
       redirect_to ride_path(@ride)
     else
       render :new, status: :unprocessable_entity
@@ -32,15 +32,15 @@ class MatchesController < ApplicationController
 
   private
 
-  def matche_params
-    params.require(:matche).permit(:transaction_pix)
+  def match_params
+    params.require(:match).permit(:transaction_pix)
   end
 
   def set_ride
     @ride = Ride.find(params[:ride_id])
   end
 
-  def can_matche?
+  def can_match?
     @matches.each do |m|
       return false if m.user.id == current_user.id
     end
