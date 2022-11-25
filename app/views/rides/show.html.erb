@@ -62,9 +62,12 @@
     </div>
 
     <div class="col-4">
-
+      <div class="card text-center">
+        <div class="card-header mb-3">
+          Veja o que estão falando sobre <strong><%= @ride.user.first_name %></strong>
+        </div>
+      </div>
       <%= render "reviews" %>
-
     </div>
   </div>
 </div>
