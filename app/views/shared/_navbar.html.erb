@@ -19,7 +19,7 @@
             <%= link_to "Todas as caronas", rides_path, class: "nav-link" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "Minhas caronas", rides_path, class: "nav-link" %>
+            <%= link_to "Minhas caronas", schedules_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
             <%= link_to "Nova carona", new_ride_path, class: "nav-link" %>
@@ -27,6 +27,7 @@
           <li class="nav-item dropdown">
             <%= cl_image_tag current_user.avatar.key, crop: :thumb, gravity: :face, class: "avatar-sm dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <p style="color: black"><%=current_user.email%></p>
               <%= link_to "Editar perfil", edit_user_registration_path(current_user), class: "dropdown-item" %>
               <%= link_to "Sair", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
