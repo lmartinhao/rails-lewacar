@@ -1,34 +1,55 @@
-<div class="container py-5" style="width: 84%;">
-    <h3 class="title mb-4 mt-3">Minhas Caronas</h3>
-  <div class="row d-flex justify-content-between">
+<div class="container py-5" style="width: 80%;">
+
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h3 class="title mb-4 mt-3">Minhas caronas</h3>
+    <%= link_to "Oferecer nova carona", new_ride_path, class: "btn btn-primary btn-sm" if policy(Ride).new? %>
+  </div>
+
+  <div>
     <% @rides.each do |ride| %>
-      <div class="card mb-4">
-        <h5 class="card-header"><strong><%= ride.date.strftime('%d/%m/%Y') %></strong></h5>
-        <div class="card-body">
-          <h5 class="card-title"><%= ride.pickup_address.capitalize %> para <%= ride.route.capitalize %></h5>
-          <p class="card-text">Horário: <%= ride.ride_time.strftime('%H:%m') %> no dia <%= ride.date.strftime('%d/%m/%Y') %></p>
-          <p class="card-text">Preço: <%= ride.price %></p>
-          <p class="card-text">Número de vagas: <%= ride.passengers %></p>
-          <p class="card-text">Vago: <%= ride.passengers - ride.matches.size %></p>
-          <h5 class="card-title">Caroneiros:</h5>
-          <div class="list-group mb-5">
-            <% ride.matches.each do |mtch| %>
-              <%= content_tag :div, id: dom_id(mtch) do %>
-              <div class="list-group-item list-group-item-action" aria-current="true">
-                <div id="match-<%=mtch.id%>" class="d-flex w-100 justify-content-between">
-                  <h5 class="mb-1"><%= mtch.user.first_name %> <%= mtch.user.first_name%></h5>
-                  <small><%= mtch.user.age%> anos de idade</small>
+      <div class="card px-0 my-3">
+        <h5 class="card-header ml-0"><i class="fa-regular fa-calendar"></i> <%= ride.date.strftime('%d/%m/%Y') %></h5>
+
+        <div class="row align-items-start">
+          <div class="col-7">
+
+            <div class="card-body">
+              <h5 class="card-title mb-4"><i class="fa-regular fa-map"></i> Viajando para <strong><%= ride.route.capitalize %></strong></h5>
+              <p class="card-text"><i class="fa-solid fa-location-dot"></i> Partindo de <strong><%= ride.pickup_address.capitalize %></strong> às <strong><%= ride.date.strftime('%d/%m/%Y') %></strong></p>
+              <p class="card-text"><i class="fa-solid fa-dollar-sign"></i> Você está cobrando <strong><%= ride.price %></strong> por pessoa</p>
+              <p class="card-text"><i class="fa-solid fa-users"></i> Total de vagas: <%= ride.passengers %> | Disponíveis: <%= ride.passengers - ride.matches.size %></p>
+            </div>
+          </div>
+
+          <div class="col-5 text-center">
+            <h5 class="card-title mt-3"><i class="fa-solid fa-suitcase"></i> Viajantes desta corrida:</h5>
+            <div class="mt-4">
+              <% match_rides = ride.matches.all %>
+              <% match_rides.each do |match_ride| %>
+
+                <div class="d-flex justify-content-start">
+                  <div class="d-flex justify-content-start">
+                    <div class="mx-1">
+                    <%= cl_image_tag match_ride.user.avatar.key, crop: :thumb, gravity: :face, class: "avatar" %>
+                    </div>
+                    <div>
+                      <p class="mb-0"><strong><%= match_ride.user.first_name %> <%= match_ride.user.last_name %></strong></p>
+                      <small><%= match_ride.user.age%> anos de idade</small>
+                      <small>Contato: <%= match_ride.user.email%></small>
+                    </div>
+                  </div>
+
+                  <div>
+                    <p class="mb-1">Identificação do Pix: <%= match_ride.transaction_pix%></p>
+                    <%unless match_ride.finished %>
+                      <p class="mb-1"><%= button_to "Confirmar!", schedule_path(match_ride), method: :patch, class: "btn btn-success btn-sm", data: { 'turbo' => "false" } %></p>
+                    <% else %>
+                      <span class="badge rounded-pill bg-success">Confirmado</span>
+                    <% end %>
+                  </div>
                 </div>
-                <p class="mb-1">Identificação do Pix: <%= mtch.transaction_pix%></p>
-                <%unless mtch.finished %>
-                  <p class="mb-1"><%= button_to "Confirmar!", schedule_path(mtch), method: :patch, class: "btn btn-primary", data: { 'turbo' => "false" } %></p>
-                <% else %>
-                  <span class="badge rounded-pill bg-success">Confirmado</span>
-                <% end %>
-                <small>Contato: <%= mtch.user.email%></small>
-              </div>
               <% end %>
-            <%end%>
+            </div>
           </div>
         </div>
       </div>
