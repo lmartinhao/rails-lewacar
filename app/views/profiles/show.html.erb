@@ -1,0 +1,7 @@
+<div class="container">
+  <h1 class="text-primary">Meu Perfil</h1>
+  <h2><%= @user.avatar %></h2>
+  <h2><strong><%= @user.full_name %></strong></h2>
+
+  <%= link_to "Editar perfil", edit_user_registration_path(@user), class: "btn btn-primary btn-sm" %>
+</div>
