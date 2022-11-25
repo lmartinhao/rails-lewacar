@@ -9,17 +9,17 @@
       <div class="card mb-5 shadow" style="width: 18rem;">
         <div class="card-body text-center">
           <div class="title">
-            Viagem com <%= ride.user.first_name %>
+            <%= cl_image_tag ride.user.avatar.key, crop: :thumb, gravity: :face, class: "avatar-sm" %> Viagem com <%= ride.user.first_name %>
           </div>
           <div>
             <hr>
             <i class="fa-regular fa-map"></i> Indo para <strong><%= ride.route %></strong>
           </div>
         </div>
-        <ul class="list-group">
+        <ul class="list-group"><small>
           <li class="list-group-item"><i class="fa-regular fa-calendar"></i> <%= ride.date %></li>
           <li class="list-group-item"><i class="fa-solid fa-location-dot"></i> <%= ride.pickup_address %></li>
-          <li class="list-group-item"><i class="fa-regular fa-clock"></i> <%#= ride.ride_time.strftime('%H:%M')%></li>
+          <li class="list-group-item"><i class="fa-regular fa-clock"></i> <%= ride.ride_time.strftime('%H:%M')%></li></small>
         </ul>
         <div class="card-body">
           <%= link_to "Mais detalhes", ride_path(ride), class: "btn btn-primary d-grid" %>
