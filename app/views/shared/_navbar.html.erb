@@ -6,7 +6,7 @@
     <% end %>
     </div>
     <div class="logo">
-    <p>Le WaCar</b>
+      <p>Le WaCar</b>
     </div>
   </div>
 
@@ -19,7 +19,8 @@
             <%= link_to "Todas as caronas", rides_path, class: "nav-link" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "Minhas caronas", reservations_path, class: "nav-link" %>
+            <%= link_to "Minhas reservas", reservations_path, class: "nav-link" %>
+            <%= link_to "Minhas caronas", schedules_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
             <%= link_to "Nova carona", new_ride_path, class: "nav-link" %>

@@ -25,6 +25,7 @@ class MatchesController < ApplicationController
     authorize @match
     if @match.save
       redirect_to ride_path(@ride)
+      flash[:notice] = "Reserva Realizada!"
     else
       render :new, status: :unprocessable_entity
     end
