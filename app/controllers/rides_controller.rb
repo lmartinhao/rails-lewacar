@@ -35,6 +35,7 @@ class RidesController < ApplicationController
     authorize @ride
     if @ride.save
       redirect_to root_path
+      flash[:notice] = "Carona Cadastrada!"
     else
       render :new, status: :unprocessable_entity
     end

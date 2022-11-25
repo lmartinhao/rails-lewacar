@@ -7,6 +7,10 @@ class MatchPolicy < ApplicationPolicy
     true
   end
 
+  def update?
+    user.id == record.ride.user.id
+  end
+
   class Scope < Scope
     def resolve
       scope.all
